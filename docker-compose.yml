@@ -13,7 +13,6 @@ services:
   proxy:
     image: ubuntu/squid
     container_name: proxyserver
-    network_mode: "host"
     ports:
       - "3128:3128"
     volumes:
