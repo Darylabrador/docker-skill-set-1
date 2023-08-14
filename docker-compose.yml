@@ -1,0 +1,69 @@
+version: '3'
+
+services:
+  reverse_proxy:
+    image: nginx:latest
+    container_name: reverse_proxy
+    ports:
+      - "80:80"
+      - "81:81"
+    volumes:
+      - ./docker/nginx_reverse_proxy/default.conf:/etc/nginx/conf.d/default.conf
+
+  proxy:
+    image: ubuntu/squid
+    container_name: proxyserver
+    network_mode: "bridge"
+    ports:
+      - "3128:3128"
+    volumes:
+      - ./docker/proxy/logs:/var/log/squid
+      - ./docker/proxy/data:/var/spool/squid
+      - ./docker/proxy/blacklisted_domain.txt:/etc/squid/blacklisted_domain.txt
+      - ./docker/proxy/squid.conf:/etc/squid/squid.conf
+
+  webserver1:
+    container_name: webserver1
+    working_dir: /var/www/
+    build:
+      args:
+        user: demo1
+        uid: 1000
+      context: ./docker/apache1
+    volumes:
+      - ./docker/apache1:/var/www
+
+  mysql1:
+    image: mariadb
+    restart: always
+    container_name: mysql1
+    environment:
+      - MARIADB_USER=demo
+      - MARIADB_PASSWORD=demo
+      - MARIADB_ROOT_PASSWORD=demo
+      - MARIADB_DATABASE=demo
+    volumes:
+      - ./docker/mariadb1:/var/lib/mysql
+
+  webserver2:
+    container_name: webserver2
+    working_dir: /var/www/
+    build:
+      args:
+        user: demo2
+        uid: 1000
+      context: ./docker/apache2
+    volumes:
+      - ./docker/apache2:/var/www
+
+  mysql2:
+    image: mariadb
+    restart: always
+    container_name: mysql2
+    environment:
+      - MARIADB_USER=demo
+      - MARIADB_PASSWORD=demo
+      - MARIADB_ROOT_PASSWORD=demo
+      - MARIADB_DATABASE=demo
+    volumes:
+      - ./docker/mariadb2:/var/lib/mysql

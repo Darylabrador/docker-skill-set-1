@@ -1,0 +1,10 @@
+demo
+mysql
+performance_schema
+sys
+.my-healthcheck.cnf
+aria*
+ib*
+maria*
+undo*
+multi*

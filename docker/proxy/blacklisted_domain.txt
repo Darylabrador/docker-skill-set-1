@@ -1,0 +1,8 @@
+facebook
+/facebook
+facebook/
+/facebook/
+youtube
+/youtube
+youtube/
+/youtube/
