@@ -24,5 +24,9 @@ Here is a skill set 1 dedicated to practice docker :
 ```
 git clone https://github.com/Darylabrador/docker-skill-set-1
 cd docker-skill-set-1
-sudo docker compose up -d
+
+# Pour OPENVPN : suivre la documentation avant de faire la commande suivante
+https://github.com/kylemanna/docker-openvpn/blob/master/docs/docker-compose.md
+
+docker compose up -d
 ```
