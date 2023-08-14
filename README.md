@@ -19,10 +19,10 @@ Here is a skill set 1 dedicated to practice docker :
 - Install and configure a LAMP with an Nginx service in reverse proxy.
 - Install and configure the Let's Encrypt service.
 
-## Apache2 conf (sur le server)
+## Installation
 
 ```
-sudo cp 000-default.conf /etc/apache2/sites-available/000-default.conf
-sudo a2enmod proxy proxy_http proxy_balancer lbmethod_byrequests rewrite
-sudo systemctl restart apache2
+git clone https://github.com/Darylabrador/docker-skill-set-1
+cd docker-skill-set-1
+sudo docker compose up -d
 ```
